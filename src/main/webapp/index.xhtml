@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+    <title>GhostNetFishing - Weltkarte</title>
+    <link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/css/style.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+</h:head>
+<h:body>
+    <ui:include src="header.xhtml" />
+
+    <div class="page-container">
+        <!-- Container für Karte und Legende -->
+        <div class="map-legend-container">
+            <!-- Karte -->
+            <div id="map"></div>
+
+            <!-- Legende -->
+            <div class="legend">
+                <p><strong>Legende:</strong></p>
+                <p><span class="legend-color" style="background: red;"></span> Gemeldet</p>
+                <p><span class="legend-color" style="background: yellow;"></span> Bergung bevorstehend</p>
+                <p><span class="legend-color" style="background: green;"></span> Geborgen</p>
+                <p><span class="legend-color" style="background: grey;"></span> Verschollen</p>
+            </div>
+        </div>
+
+        <!-- Tabelle mit Geisternetz-Infos -->
+        <div class="table-container">
+            <h:dataTable value="#{geisternetzBean.geisternetze}" var="netz" class="info-table">
+                <h:column>
+                    <f:facet name="header">Nummer</f:facet>
+                    <h:outputText value="#{netz.id}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Latitude</f:facet>
+                    <h:outputText value="#{netz.latitude}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Longitude</f:facet>
+                    <h:outputText value="#{netz.longitude}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Größe</f:facet>
+                    <h:outputText value="#{netz.groesse}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Status</f:facet>
+                    <h:outputText value="#{geisternetzBean.getStatusText(netz.status)}" />
+                </h:column>
+            </h:dataTable>
+        </div>
+
+        <!-- Skript zur Karteninitialisierung -->
+        <script type="text/javascript">
+            document.addEventListener("DOMContentLoaded", function () {
+                try {
+                    // Karte initialisieren
+                    var map = L.map('map').setView([20, 0], 2);
+
+                    // OpenStreetMap-Tiles laden
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        maxZoom: 18,
+                        attribution: 'OpenStreetMap contributors'
+                    }).addTo(map);
+
+                    // JSON-Daten der Geisternetze laden
+                    var geisternetzeData = JSON.parse('#{geisternetzBean.geisternetzeAsJson}');
+                    var bounds = [];
+
+                    function getColorForStatus(status) {
+                        switch (status) {
+                            case 'GEMELDET':
+                                return 'red';
+                            case 'BERGUNG_BEVORSTEHEND':
+                                return 'yellow';
+                            case 'GEBORGEN':
+                                return 'green';
+                            case 'VERSCHOLLEN':
+                                return 'grey';
+                            default:
+                                return 'white';
+                        }
+                    }
+
+                    // Marker hinzufügen
+                    geisternetzeData.forEach(function (netz) {
+                        var marker = L.circleMarker([netz.latitude, netz.longitude], {
+                            color: getColorForStatus(netz.status),
+                            radius: 8,
+                            fillOpacity: 0.8
+                        }).addTo(map);
+
+                        marker.bindPopup(
+                            `&lt;b>ID:&lt;/b> ${netz.id}&lt;br>
+                             &lt;b>Status:&lt;/b> ${netz.status}&lt;br>
+                             &lt;b>Größe:&lt;/b> ${netz.groesse} qm`
+                        );
+                        bounds.push([netz.latitude, netz.longitude]);
+                    });
+
+                    // Karte an die Marker anpassen
+                    if (bounds.length > 0) {
+                        map.fitBounds(bounds);
+                    }
+                } catch (error) {
+                    console.error("Fehler beim Laden der Karte: ", error);
+                }
+            });
+        </script>
+    </div>
+
+    <ui:include src="/footer.xhtml" />
+</h:body>
+</html>

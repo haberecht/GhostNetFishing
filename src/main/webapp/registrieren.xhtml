@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:head>
+    <title>Registrierung</title>
+    <link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/css/style.css" />
+</h:head>
+<h:body>
+    <ui:include src="header.xhtml" />
+
+    <div class="registration-container">
+        <div class="registration-box">
+            <h2>Registrierung</h2>
+            <h:form>
+                <!-- Fehlermeldungen -->
+                <h:messages globalOnly="true" styleClass="error-message" />
+
+                <!-- Name -->
+                <div class="form-group">
+                    <h:outputLabel value="Name:" for="name" class="form-label" />
+                    <h:inputText id="name" value="#{bergendePersonBean.bergendePerson.name}" required="true" class="form-input" />
+                </div>
+
+                <!-- Nachname -->
+                <div class="form-group">
+                    <h:outputLabel value="Nachname:" for="surname" class="form-label" />
+                    <h:inputText id="surname" value="#{bergendePersonBean.bergendePerson.surname}" required="true" class="form-input" />
+                </div>
+
+                <!-- E-Mail -->
+                <div class="form-group">
+                    <h:outputLabel value="E-Mail:" for="mail" class="form-label" />
+                    <h:inputText id="mail" value="#{bergendePersonBean.bergendePerson.mail}" required="true" class="form-input" />
+                    <h:message for="mail" styleClass="error-message" />
+                </div>
+
+                <!-- Telefonnummer -->
+                <div class="form-group">
+                    <h:outputLabel value="Telefonnummer:" for="phoneNumber" class="form-label" />
+                    <h:inputText id="phoneNumber" value="#{bergendePersonBean.bergendePerson.phoneNumber}" required="true" class="form-input" />
+                </div>
+
+                <!-- Passwort -->
+                <div class="form-group">
+                    <h:outputLabel value="Passwort:" for="password" class="form-label" />
+                    <h:inputSecret id="password" value="#{bergendePersonBean.bergendePerson.password}" required="true" class="form-input" />
+                    <h:message for="password" styleClass="error-message" />
+                </div>
+
+                <!-- Registrierungsbutton -->
+                <div class="form-group">
+                    <h:commandButton value="Registrieren" action="#{bergendePersonBean.registrieren}" class="form-button" />
+                </div>
+            </h:form>
+        </div>
+    </div>
+
+    <ui:include src="/footer.xhtml" />
+</h:body>
+</html>

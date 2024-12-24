@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+    <title>Geisternetz melden (bergende Person)</title>
+    <link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/css/style.css"/>
+</h:head>
+<h:body>
+    <!-- Header einbinden -->
+    <ui:include src="securedHeader.xhtml" />
+
+    <!-- Formular Container -->
+    <div class="form-container">
+        <h:form>
+            <!-- Fehlermeldungen -->
+            <h:messages globalOnly="true" styleClass="error-messages"/>
+
+            <!-- Titel -->
+            <h2>Geisternetz melden</h2>
+
+            <!-- Persönliche Informationen -->
+            <h3>Persönliche Informationen</h3>
+            <div class="form-group">
+                <h:outputLabel value="Vorname:" for="name" class="form-label"/>
+                <h:outputText id="name" value="#{loginBean.loggedInUser.name}" class="form-input"/>
+            </div>
+            <div class="form-group">
+                <h:outputLabel value="Nachname:" for="surname" class="form-label"/>
+                <h:outputText id="surname" value="#{loginBean.loggedInUser.surname}" class="form-input"/>
+            </div>
+            <div class="form-group">
+                <h:outputLabel value="E-Mail:" for="email" class="form-label"/>
+                <h:outputText id="email" value="#{loginBean.email}" class="form-input"/>
+            </div>
+
+            <!-- Details zum Geisternetz -->
+            <h3>Details zum Geisternetz</h3>
+            <div class="form-group">
+                <h:outputLabel value="Latitude:" for="latitude" class="form-label"/>
+                <h:inputText id="latitude" value="#{geisternetzBean.neuesGeisternetz.latitude}" required="true" class="form-input"/>
+            </div>
+            <div class="form-group">
+                <h:outputLabel value="Longitude:" for="longitude" class="form-label"/>
+                <h:inputText id="longitude" value="#{geisternetzBean.neuesGeisternetz.longitude}" required="true" class="form-input"/>
+            </div>
+            <div class="form-group">
+                <h:outputLabel value="Größe (qm):" for="groesse" class="form-label"/>
+                <h:inputText id="groesse" value="#{geisternetzBean.neuesGeisternetz.groesse}" required="true" class="form-input"/>
+            </div>
+
+            <!-- Absenden -->
+            <div class="form-group">
+                <h:commandButton value="Geisternetz melden" action="#{geisternetzBean.addGeisternetz}" class="form-button"/>
+            </div>
+        </h:form>
+    </div>
+
+    <!-- Footer einbinden -->
+    <ui:include src="/footer.xhtml" />
+</h:body>
+</html>

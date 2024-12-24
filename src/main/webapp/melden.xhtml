@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+    <title>Geisternetz melden</title>
+    <link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/css/style.css" />
+</h:head>
+
+<h:body>
+    <!-- Header einbinden -->
+    <ui:include src="header.xhtml" />
+
+    <div class="registration-container">
+        <div class="registration-box">
+            <h2>Geisternetz melden</h2>
+            <h:form>
+                <!-- Fehlermeldungen -->
+                <h:messages globalOnly="true" styleClass="error-messages" />
+
+                <!-- Persönliche Informationen -->
+                <h3>Persönliche Informationen</h3>
+                <h:panelGroup rendered="#{!loginBean.loggedIn}">
+                    <div class="form-group">
+                        <h:outputLabel value="Name:" for="name" class="form-label" />
+                        <h:inputText id="name" value="#{geisternetzBean.meldendePerson.name}"
+                                     required="true" class="form-input" />
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel value="Nachname:" for="surname" class="form-label" />
+                        <h:inputText id="surname" value="#{geisternetzBean.meldendePerson.surname}"
+                                     required="true" class="form-input" />
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel value="Anonym melden:" for="isAnonymous" class="form-label" />
+                        <h:selectBooleanCheckbox id="isAnonymous" value="#{geisternetzBean.meldendePerson.isAnonymous}"
+                                                 class="form-checkbox">
+                            <!-- Dynamisches Rendern des Telefonfelds -->
+                            <f:ajax render="phoneRow" />
+                        </h:selectBooleanCheckbox>
+                    </div>
+
+                    <!-- Telefonfeld, das dynamisch basierend auf der Auswahl für Anonymität angezeigt wird -->
+                    <h:panelGroup id="phoneRow">
+                        <div class="form-group" style="display: #{geisternetzBean.meldendePerson.isAnonymous ? 'none' : 'block'};">
+                            <h:outputLabel value="Telefonnummer (optional):" for="phoneNumber" class="form-label" />
+                            <h:inputText id="phoneNumber" value="#{geisternetzBean.meldendePerson.phoneNumber}" class="form-input" />
+                        </div>
+                    </h:panelGroup>
+                </h:panelGroup>
+
+                <!-- Geisternetz Details -->
+                <h3>Details zum Geisternetz</h3>
+                <div class="form-group">
+                    <h:outputLabel value="Latitude:" for="latitude" class="form-label" />
+                    <h:inputText id="latitude" value="#{geisternetzBean.neuesGeisternetz.latitude}"
+                                 required="true" class="form-input" />
+                </div>
+
+                <div class="form-group">
+                    <h:outputLabel value="Longitude:" for="longitude" class="form-label" />
+                    <h:inputText id="longitude" value="#{geisternetzBean.neuesGeisternetz.longitude}"
+                                 required="true" class="form-input" />
+                </div>
+
+                <div class="form-group">
+                    <h:outputLabel value="Größe (qm):" for="groesse" class="form-label" />
+                    <h:inputText id="groesse" value="#{geisternetzBean.neuesGeisternetz.groesse}"
+                                 required="true" class="form-input" />
+                </div>
+
+                <!-- Absenden -->
+                <div class="form-group">
+                    <h:commandButton value="Geisternetz melden" action="#{geisternetzBean.addGeisternetz}"
+                                     class="form-button" />
+                </div>
+            </h:form>
+        </div>
+    </div>
+
+    <!-- Footer einbinden -->
+    <ui:include src="/footer.xhtml" />
+</h:body>
+</html>

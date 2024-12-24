@@ -1,0 +1,24 @@
+# Betriebssystem-Dateien
+.DS_Store
+Thumbs.db
+
+# IDEs
+.idea/
+*.iml
+.vscode/
+.classpath
+.project
+.settings/
+
+# Maven
+target/
+
+# Logs
+*.log
+
+# JAR/War-Dateien
+*.jar
+*.war
+
+# Temporäre Dateien
+*.tmp

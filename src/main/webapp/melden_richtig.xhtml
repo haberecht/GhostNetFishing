@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:head>
+    <title>Geisternetz melden</title>
+    <link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/css/style.css" />
+</h:head>
+<h:body>
+    <ui:include src="header.xhtml" />
+
+    <div class="registration-container">
+        <div class="registration-box">
+            <h2>Geisternetz melden</h2>
+            <h:form>
+                <!-- Fehlermeldungen -->
+                <h:messages globalOnly="true" styleClass="error-message" />
+
+                <!-- Latitude -->
+                <div class="form-group">
+                    <h:outputLabel value="Latitude:" for="latitude" class="form-label" />
+                    <h:inputText id="latitude" value="#{geisternetzBean.neuesGeisternetz.latitude}" required="true" class="form-input" />
+                </div>
+
+                <!-- Longitude -->
+                <div class="form-group">
+                    <h:outputLabel value="Longitude:" for="longitude" class="form-label" />
+                    <h:inputText id="longitude" value="#{geisternetzBean.neuesGeisternetz.longitude}" required="true" class="form-input" />
+                </div>
+
+                <!-- Größe -->
+                <div class="form-group">
+                    <h:outputLabel value="Größe:" for="groesse" class="form-label" />
+                    <h:inputText id="groesse" value="#{geisternetzBean.neuesGeisternetz.groesse}" required="true" class="form-input" />
+                </div>
+
+                <!-- Status -->
+                <div class="form-group">
+                    <h:outputLabel value="Status:" for="status" class="form-label" />
+                    <h:selectOneMenu id="status" value="#{geisternetzBean.neuesGeisternetz.status}" class="form-input">
+                        <f:selectItem itemValue="GEMELDET" itemLabel="Gemeldet" />
+                        <f:selectItem itemValue="BERGUNG_BEVORSTEHEND" itemLabel="Bergung bevorstehend" />
+                        <f:selectItem itemValue="GEBORGEN" itemLabel="Geborgen" />
+                        <f:selectItem itemValue="VERSCHOLLEN" itemLabel="Verschollen" />
+                    </h:selectOneMenu>
+                </div>
+
+                <!-- Melden-Button -->
+                <div class="form-group">
+                    <h:commandButton value="Geisternetz melden" action="#{geisternetzBean.addGeisternetz}" class="form-button" />
+                </div>
+            </h:form>
+        </div>
+    </div>
+
+    <ui:include src="/footer.xhtml" />
+</h:body>
+</html>

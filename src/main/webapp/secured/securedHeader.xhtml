@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+<h:head>
+    <meta charset="UTF-8"/>
+    <title>GhostNetFishing - Willkommen</title>
+    <link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/css/style.css"/>
+</h:head>
+<h:body>
+    <div class="header-container">
+        <!-- Titel -->
+        <h1 class="header-title">Rette die Meere – Melde Geisternetze!</h1>
+
+        <!-- Navigation -->
+        <nav class="header-nav">
+            <!-- Links -->
+            <h:link value="Startseite" outcome="/secured/securedIndex.xhtml" styleClass="nav-link"/>
+            <h:link value="Übersicht Geisternetze" outcome="/secured/geisternetzUebersicht.xhtml" styleClass="nav-link"/>
+            <h:link value="Geisternetz melden" outcome="/secured/securedMelden.xhtml" />
+
+
+            <!-- Logout -->
+            <h:form>
+                <h:commandLink value="Logout" action="#{loginBean.logout}" styleClass="nav-link" />
+            </h:form>
+        </nav>
+    </div>
+</h:body>
+</html>

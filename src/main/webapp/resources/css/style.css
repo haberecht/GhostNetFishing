@@ -1,0 +1,237 @@
+
+/* ========================== */
+/*    Allgemeine Stile        */
+/* ========================== */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+}
+
+.page-container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ========================== */
+/*    Header-Bereich          */
+/* ========================== */
+.header-container {
+    background-color: #007bff;
+    color: #ffffff;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.header-nav {
+    display: flex;
+    gap: 20px;
+    justify-content: center; /* Zentriert die Navigation */
+    margin-top: 20px; /* Abstand von der Überschrift */
+}
+
+.header-nav a {
+    color: #ffffff;
+    font-size: 18px; /* Größere Schrift */
+    font-weight: bold; /* Fett */
+    text-decoration: none; /* Entfernt Unterstreichung */
+    transition: color 0.3s ease;
+}
+
+.header-nav a:hover {
+    color: #ffdd33; /* Hervorhebung beim Hover */
+}
+
+.header-title {
+    font-size: 36px;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 10px; /* Weniger Abstand zur Navigation */
+}
+
+/* ========================== */
+/*    Footer-Bereich          */
+/* ========================== */
+.footer-container {
+    background-color: #007bff;
+    color: #ffffff;
+    padding: 20px 0;
+    text-align: center;
+    margin-top: 20px;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+    border-top: 1px solid #0056b3;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    font-size: 14px;
+}
+
+.footer-content p {
+    margin: 0;
+    padding: 5px 0;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* ========================== */
+/*    Formularelemente        */
+/* ========================== */
+.form-container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333333;
+}
+
+.form-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.form-button {
+    background-color: #007bff;
+    color: #ffffff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+.form-button:hover {
+    background-color: #0056b3;
+}
+
+/* ========================== */
+/*    Fehlermeldungen         */
+/* ========================== */
+.error-messages {
+    background-color: #ffdddd;
+    color: #cc0000;
+    border: 1px solid #cc0000;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+}
+
+.error-message {
+    color: #cc0000;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+/* ========================== */
+/*    Ajax                    */
+/* ========================== */
+.hidden {
+    display: none;
+}
+
+/* ========================== */
+/*    Map                     */
+/* ========================== */
+
+.map-legend-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 20px;
+    align-items: flex-start; /* Option, um die Karte und Legende korrekt auszurichten */
+}
+
+#map {
+    flex: 3;
+    min-height: 500px; /* Mindesthöhe sicherstellen */
+    height: 500px; /* Statische Höhe */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #eaeaea; /* Hilft, Probleme visuell zu erkennen */
+}
+
+/* ========================== */
+/*    Legende                 */
+/* ========================== */
+
+.legend {
+    flex: 1;
+    background-color: #f9f9f9;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.legend p {
+    margin: 5px 0;
+}
+
+.legend-color {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    vertical-align: middle;
+    border: 1px solid #ccc;
+}
+
+/* ========================== */
+/*    Tabelle                 */
+/* ========================== */
+
+.table-container {
+    margin-top: 20px;
+    overflow-x: auto;
+}
+
+.info-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.info-table th, .info-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.info-table th {
+    background-color: #007bff;
+    color: white;
+}
+
+.info-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.info-table tr:hover {
+    background-color: #ddd;
+}

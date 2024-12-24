@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:head>
+    <title>Übersicht der Geisternetze</title>
+    <link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/css/style.css" />
+</h:head>
+<h:body>
+    <!-- Header einbinden -->
+    <ui:include src="securedHeader.xhtml" />
+
+    <div class="page-container">
+        <div class="table-container">
+            <h:form>
+            <h:dataTable value="#{geisternetzBean.geisternetze}" var="netz" class="info-table">
+                <h:column>
+                    <f:facet name="header">Nummer</f:facet>
+                    <h:outputText value="#{netz.id}" />
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Latitude</f:facet>
+                    <h:outputText value="#{netz.latitude}" />
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Longitude</f:facet>
+                    <h:outputText value="#{netz.longitude}" />
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Größe</f:facet>
+                    <h:outputText value="#{netz.groesse}" />
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Status</f:facet>
+                    <h:outputText value="#{geisternetzBean.getStatusText(netz.status)}" />
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Bergende Person</f:facet>
+                    <h:outputText value="#{geisternetzBean.getBergendePersonDetails(netz)}" />
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Aktionen</f:facet>
+                    <h:panelGroup layout="block">
+                        <h:commandButton value="Bergen"
+                                         action="#{geisternetzBean.bergeNetz(netz)}"
+                                         rendered="#{netz.status eq 'GEMELDET'}"
+                                         styleClass="action-button" />
+
+                        <h:commandButton value="Als geborgen markieren"
+                                         action="#{geisternetzBean.markiereAlsGeborgen(netz)}"
+                                         rendered="#{netz.status eq 'BERGUNG_BEVORSTEHEND'}"
+                                         styleClass="action-button" />
+
+                        <h:commandButton value="Als verschollen markieren"
+                                         action="#{geisternetzBean.markiereAlsVerschollen(netz)}"
+                                         rendered="#{netz.status eq 'GEMELDET' or netz.status eq 'BERGUNG_BEVORSTEHEND'}"
+                                         styleClass="action-button" />
+                    </h:panelGroup>
+                </h:column>
+            </h:dataTable>
+            </h:form>
+        </div>
+    </div>
+    <ui:include src="/footer.xhtml" />
+</h:body>
+</html>
